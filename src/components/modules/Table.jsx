@@ -1,9 +1,29 @@
 import React from 'react';
+import {CirclesWithBar} from "react-loader-spinner";
+import ReactPaginate from "react-paginate";
 
-function Table({coins}) {
-    console.log("ddd", coins);
+function Table({coins, isLoading}) {
     return (
-        <div className="overflow-y-auto max-h-[640px]">
+        <div className="overflow-y-auto max-h-[640px]">{isLoading ? (
+
+            <div className="flex items-center justify-center">
+                <CirclesWithBar
+                    height="100"
+                    width="100"
+                    color="#4fa94d"
+                    outerCircleColor="#4fa94d"
+                    innerCircleColor="#4fa94d"
+                    barColor="#4fa94d"
+                    ariaLabel="circles-with-bar-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                />
+
+
+            </div>
+
+        ) : (
             <table className="min-w-full table-auto border-collapse relative">
                 <thead className="bg-white bg-opacity-20 backdrop-blur-lg sticky top-0 z-20 shadow-xl rounded-t-lg">
                 <tr className="text-left">
@@ -19,14 +39,15 @@ function Table({coins}) {
                     <tr key={coin.id} className="hover:bg-gray-50 cursor-pointer">
                         <td className="px-4 py-2 border-b">
                             <div className="flex items-center space-x-2">
-                                <img src={coin.image} alt={coin.name} width="30px" />
+                                <img src={coin.image} alt={coin.name} width="30px"/>
                                 <span className="font-semibold">{coin.symbol.toUpperCase()}</span>
                             </div>
                         </td>
                         <td className="px-4 py-2 border-b">{coin.name}</td>
                         <td className="px-4 py-2 border-b text-right">${coin.current_price.toLocaleString()}</td>
                         <td className="px-4 py-2 border-b text-right">
-                                <span className={coin.price_change_percentage_24h > 0 ? 'text-green-500' : 'text-red-500'}>
+                                <span
+                                    className={coin.price_change_percentage_24h > 0 ? 'text-green-500' : 'text-red-500'}>
                                     {coin.price_change_percentage_24h.toFixed(2)}%
                                 </span>
                         </td>
@@ -35,6 +56,8 @@ function Table({coins}) {
                 ))}
                 </tbody>
             </table>
+        )}
+
         </div>
     );
 }
