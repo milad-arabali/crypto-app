@@ -3,7 +3,11 @@ import ReactPaginate from "react-paginate";
 import {coinsList, options, totalCoinsList} from "../../services/coinsApi.js";
 import Table from "../modules/Table.jsx";
 import Search from "../modules/search.jsx";
+import Modal from "react-modal";
+import Chart from "../modules/chart.jsx";
 
+
+Modal.setAppElement("#root");
 
 function Home() {
     const [coins, setCoins] = useState([]);
@@ -11,7 +15,10 @@ function Home() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [currency, setCurrency] = useState("usd");
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [coinId, setCoinId] = useState(0);
     const itemsPerPage = 10;
+
 
     const handlePageClick = (event) => {
         setCurrentPage(event.selected + 1);
@@ -48,8 +55,8 @@ function Home() {
 
     return (
         <div className="flex flex-col h-[629px] w-full sm:w-[80%] md:w-[70%] lg:w-[60%] mx-auto overflow-y-auto">
-            <Search currency={currency} setCurrency={setCurrency}/>
-            <Table coins={coins} isLoading={load}/>
+            <Search currency={currency} setCurrency={setCurrency} />
+            <Table coins={coins} isLoading={load} setModalIsOpen={setModalIsOpen} setCoinId={setCoinId}/>
             <ReactPaginate
                 previousLabel={"قبلی"}
                 nextLabel={"بعدی"}
@@ -66,6 +73,16 @@ function Home() {
                 breakClassName="flex justify-center items-center px-4 py-2 text-gray-500 cursor-pointer"
                 pageLinkClassName="w-full h-full flex justify-center items-center"
             />
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={() => setModalIsOpen(false)}
+                className="bg-white p-5 rounded-lg shadow-lg w-96 mx-auto"
+                overlayClassName="fixed inset-0 flex justify-center items-center bg-black/30 backdrop-blur-md"
+            >
+
+                <Chart setModalIsOpen={setModalIsOpen} cointId={coins} coinId={coinId} currency={currency} />
+
+            </Modal>
 
 
         </div>

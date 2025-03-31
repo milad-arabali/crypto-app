@@ -8,6 +8,7 @@ function Search({currency, setCurrency}) {
     const [searchCoinList, setSearchCoinList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+
     useEffect(() => {
         if (!searchText) {
             setSearchCoinList([]);

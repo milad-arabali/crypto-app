@@ -18,4 +18,9 @@ const searchCoinsList = (query) => {
     return `https://api.coingecko.com/api/v3/search?query=${query}`;
 };
 
-export {coinsList, totalCoinsList, searchCoinsList, options};
+const chartList = (id, currency) => {
+    return `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=${currency}&days=7`;
+};
+
+
+export {coinsList, totalCoinsList, searchCoinsList, chartList, options};
