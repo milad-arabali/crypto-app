@@ -7,12 +7,15 @@ const options = {
 };
 
 
-const coinsList = (itemsPerPage, currentPage) => {
-    return `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=${itemsPerPage}&page=${currentPage}`;
+const coinsList = (itemsPerPage, currentPage, currency) => {
+    return `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&per_page=${itemsPerPage}&page=${currentPage}`;
 };
 
-const totalCoinsList = () => {
-    return `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd`;
+const totalCoinsList = (currency) => {
+    return `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}`;
+};
+const searchCoinsList = (query) => {
+    return `https://api.coingecko.com/api/v3/search?query=${query}`;
 };
 
-export {coinsList,totalCoinsList, options};
+export {coinsList, totalCoinsList, searchCoinsList, options};
