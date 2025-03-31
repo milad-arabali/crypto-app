@@ -47,7 +47,7 @@ function Home() {
     }, [currentPage, currency]);
 
     return (
-        <div className="flex flex-col h-[630px] w-full sm:w-[80%] md:w-[70%] lg:w-[60%] mx-auto overflow-y-auto">
+        <div className="flex flex-col h-[629px] w-full sm:w-[80%] md:w-[70%] lg:w-[60%] mx-auto overflow-y-auto">
             <Search currency={currency} setCurrency={setCurrency}/>
             <Table coins={coins} isLoading={load}/>
             <ReactPaginate
